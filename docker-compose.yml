@@ -1,0 +1,79 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    build: db
+    restart: always
+    environment:
+      POSTGRES_USER: iron
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ironcurtain
+      PGPORT: 5432
+
+  frontend:
+    build: frontend
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on: [
+      db,
+      units-api,
+      submit-api,
+      search-api,
+      display-api
+    ]
+    
+  units-api:
+    build: api/units
+    restart: always
+    environment: 
+      POSTGRES_ADDRESS: db
+      POSTGRES_USER: iron
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ironcurtain
+      PGPORT: 5432
+    ports:
+      - 4444:4444
+    depends_on: [db]
+
+  submit-api:
+    build: api/submit
+    restart: always
+    environment: 
+      POSTGRES_ADDRESS: db
+      POSTGRES_USER: iron
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ironcurtain
+      PGPORT: 5432
+    ports:
+      - 3006:3006
+    depends_on: [db]
+
+  search-api:
+    build: api/search
+    restart: always
+    environment: 
+      POSTGRES_ADDRESS: db
+      POSTGRES_USER: iron
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ironcurtain
+      PGPORT: 5432
+    ports:
+      - 3010:3010
+    depends_on: [db]
+
+  display-api:
+    build: api/display
+    restart: always
+    environment: 
+      POSTGRES_ADDRESS: db
+      POSTGRES_USER: iron
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ironcurtain
+      PGPORT: 5432
+    ports:
+      - 5001:5001
+    depends_on: [db]
+

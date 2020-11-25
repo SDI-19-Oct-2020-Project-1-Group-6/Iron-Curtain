@@ -1,0 +1,9 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/SDI-19-Oct-2020-Project-1-Group-6/GDMilitary-Frontend.git
+[submodule "api"]
+	path = api
+	url = https://github.com/SDI-19-Oct-2020-Project-1-Group-6/GDMilitary-API.git
+[submodule "db"]
+	path = db
+	url = https://github.com/SDI-19-Oct-2020-Project-1-Group-6/GDMilitary-DB.git
